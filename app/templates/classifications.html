@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Classifications</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Trained Classes</h1>
+    <button onclick="window.location.href='{{ url_for('home') }}'">Go to Homepage</button>
+    <div class="container">
+        <ol>
+            {% for name in items %}
+                <li>{{ name }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+</body>
+</html>
