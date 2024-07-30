@@ -1,25 +1,27 @@
-import requests
-from PIL import Image
 import io
-import torch
-import torchvision.transforms as transforms
-from torchvision import models
-from torchvision.models import ResNet50_Weights
 import json
 import os
 from typing import Optional
+
+import requests
+import torch
+import torchvision.transforms as transforms
+from PIL import Image
+from torchvision import models
+from torchvision.models import ResNet50_Weights
+
 
 class Model:
     def __init__(self):
         # Load pre-trained model
         self.model = models.resnet50(weights=ResNet50_Weights.DEFAULT)
         self.model.eval()
-        
+
         # Load the pre-trained classes from file
         current_dir = os.path.dirname(__file__)
         parent_dir = os.path.dirname(current_dir)
-        json_file_path = os.path.join(parent_dir, 'trained_classes.json')
-        with open(json_file_path, 'r') as file:
+        json_file_path = os.path.join(parent_dir, "trained_classes.json")
+        with open(json_file_path, "r") as file:
             self.imagenet_classes = json.load(file)
 
     @staticmethod
@@ -38,19 +40,22 @@ class Model:
 
     @staticmethod
     def process_image(img: Image.Image) -> torch.Tensor:
-        preprocess = transforms.Compose([
-            transforms.Resize(256), # Resize images to be consistent
-            transforms.CenterCrop(224), # Take the center area 
-            transforms.ToTensor(), # Convert to numpy tensor
-            transforms.Lambda(lambda x: x[:3, :, :]),  # Ensure 3 channels
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ])
+        preprocess = transforms.Compose(
+            [
+                transforms.Resize(256),  # Resize images to be consistent
+                transforms.CenterCrop(224),  # Take the center area
+                transforms.ToTensor(),  # Convert to numpy tensor
+                transforms.Lambda(lambda x: x[:3, :, :]),  # Ensure 3 channels
+                transforms.Normalize(
+                    mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+                ),
+            ]
+        )
         img_t = preprocess(img)
         img_t = img_t.unsqueeze(0)
         return img_t
 
     def predict(self, img_t: torch.Tensor) -> torch.Tensor:
-        # TODO - Get the accuracry of the precition
         with torch.no_grad():
             output = self.model(img_t)
         return output
