@@ -56,7 +56,6 @@ class Model:
         return img_t
 
     def predict(self, img_t: torch.Tensor) -> torch.Tensor:
-        # TODO - Get the accuracry of the precition
         with torch.no_grad():
             output = self.model(img_t)
         return output

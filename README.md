@@ -24,7 +24,7 @@ To run the project, follow these steps:
 ## Why ResNet-50 and Flask?
 ### ResNet-50
 - **High Accuracy**: ResNet-50 achieves high accuracy in image classification tasks, making it a reliable choice.
-- **Pre-trained Models**: Availability of pre-trained models on large datasets like ImageNet makes it easy to use for transfer learning. Note, the pre-trained classes were specified via this [link](https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json)
+- **Pre-trained Models**: Availability of pre-trained models on large datasets like ImageNet makes it easy to use for transfer learning. Note, the pre-trained classes were specified via this [link](https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json) and note these classes may be updated in the future so redownload the file if necessary.
 
 ### Flask
 - **Lightweight**: Flask is a lightweight web framework that is easy to set up and use.
@@ -48,6 +48,7 @@ To run the tests for this project, follow these steps:
 Here are some potential extensions for the project:
 - **Improve UI**: Make the pages prettier and add a limit on the number of images before it begins removing them.
 - **Testing**: Add more comprehensive tests to ensure the reliability of the application.
+- **Image cleanup**: Add a feature to remove images after a certain period to free up space.
 
 ## Design Choices
 - **File Structure**: The project is split into multiple files to enhance maintainability. For example, the main application logic is in `app/main.py`, while other functionalities are modularised.
@@ -57,5 +58,8 @@ Here are some potential extensions for the project:
   - **isort**: For sorting imports to maintain a clean and organised import structure -> `poetry run isort .`
   - **mypy**: For static type checking to catch type-related errors early in the development process -> `poetry run mypy .`
 
-# TODO 
-- Check if an easier way to deploy it
+## Future steps
+- **Deployment**: Deploy the application to a cloud platform like AWS. Be aware of the static folder being publicly accessible.
+- **Monitoring**: Add monitoring for the application to track performance and usage.
+- **Security**: Enhance security by adding measures like rate limiting.
+
