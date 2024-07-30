@@ -1,12 +1,13 @@
 import json
 import os
 from typing import Dict, List
-from app import create_app
 
 import validators
 from flask import Flask, render_template, request
 from home_page import process_image, render_home_template
 from models.machine_learning import Model
+
+from app import create_app
 
 app = create_app()
 
